@@ -16,7 +16,7 @@ class Maze:
         cell_size_x: float,
         cell_size_y: float,
         win: Window | None = None,
-        seed = None,
+        seed=None,
     ):
         self.__cells: list[list[Cell]] = []
         self.__x1 = x1
@@ -66,7 +66,7 @@ class Maze:
 
         self.__cells[self.__num_rows - 1][self.__num_cols - 1].has_bottom_wall = False
         self.__draw_cell(self.__num_rows - 1, self.__num_cols - 1)
-    
+
     def __break_walls_r(self, i: int, j: int):
         self.__cells[i][j].visited = True
 
@@ -85,11 +85,11 @@ class Maze:
                     continue
 
                 possible_dir.append((y, x))
-            
+
             if not len(possible_dir):
                 self.__draw_cell(i, j)
                 return
-            
+
             y, x = random.choice(possible_dir)
             if x - j == 1 and y - i == 0:
                 self.__cells[i][j].has_right_wall = False
@@ -104,12 +104,12 @@ class Maze:
             elif x - j == 0 and y - i == -1:
                 self.__cells[i][j].has_top_wall = False
                 self.__cells[y][x].has_bottom_wall = False
-            
+
             self.__draw_cell(i, j)
             self.__draw_cell(y, x)
 
             self.__break_walls_r(y, x)
-    
+
     def __reset_cells_visited(self):
         for row in self.__cells:
             for cell in row:

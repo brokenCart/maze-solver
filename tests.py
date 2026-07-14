@@ -50,7 +50,9 @@ class Tests(unittest.TestCase):
         cells = getattr(m1, "_Maze__cells")
         for i in range(num_rows):
             for j in range(num_cols):
-                self.assertFalse(cells[i][j].visited, f"Cell at ({i}, {j}) was not reset")
+                self.assertFalse(
+                    cells[i][j].visited, f"Cell at ({i}, {j}) was not reset"
+                )
 
         # Manually set some cells to visited = True
         cells[0][0].visited = True
@@ -63,7 +65,10 @@ class Tests(unittest.TestCase):
         # Check they are reset to False
         for i in range(num_rows):
             for j in range(num_cols):
-                self.assertFalse(cells[i][j].visited, f"Cell at ({i}, {j}) was not reset after manual trigger")
+                self.assertFalse(
+                    cells[i][j].visited,
+                    f"Cell at ({i}, {j}) was not reset after manual trigger",
+                )
 
     def test_maze_vertical_wall_breaking(self):
         num_cols = 1
@@ -72,11 +77,13 @@ class Tests(unittest.TestCase):
         cells = getattr(m1, "_Maze__cells")
         # (0, 0) is connected to (1, 0)
         # Therefore, (0, 0) should have has_bottom_wall = False, and (1, 0) has_top_wall = False
-        self.assertFalse(cells[0][0].has_bottom_wall, "Cell (0, 0) bottom wall should be broken")
-        self.assertFalse(cells[1][0].has_top_wall, "Cell (1, 0) top wall should be broken")
+        self.assertFalse(
+            cells[0][0].has_bottom_wall, "Cell (0, 0) bottom wall should be broken"
+        )
+        self.assertFalse(
+            cells[1][0].has_top_wall, "Cell (1, 0) top wall should be broken"
+        )
 
 
 if __name__ == "__main__":
     unittest.main()
-
-
