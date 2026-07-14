@@ -84,6 +84,14 @@ class Tests(unittest.TestCase):
             cells[0][1].has_top_wall, "Cell (0, 1) top wall should be broken"
         )
 
+    def test_maze_solve(self):
+        num_cols = 3
+        num_rows = 3
+        m1 = Maze(0, 0, num_cols, num_rows, 10, 10, seed=42)
+        # Should solve successfully
+        self.assertTrue(m1.solve())
+
 
 if __name__ == "__main__":
     unittest.main()
+
