@@ -79,7 +79,9 @@ class Maze:
                 next_i = i + di
                 next_j = j + dj
 
-                if not ((0 <= next_i < self.__num_cols) and (0 <= next_j < self.__num_rows)):
+                if not (
+                    (0 <= next_i < self.__num_cols) and (0 <= next_j < self.__num_rows)
+                ):
                     continue
 
                 if self.__cells[next_i][next_j].visited:
@@ -114,7 +116,7 @@ class Maze:
         for col in self.__cells:
             for cell in col:
                 cell.visited = False
-    
+
     def solve(self):
         queue = deque([(0, 0)])
         prev: dict[tuple[int, int], tuple[int, int] | None] = {(0, 0): None}
@@ -132,7 +134,9 @@ class Maze:
                 next_i = i + di
                 next_j = j + dj
 
-                if not ((0 <= next_i < self.__num_cols) and (0 <= next_j < self.__num_rows)):
+                if not (
+                    (0 <= next_i < self.__num_cols) and (0 <= next_j < self.__num_rows)
+                ):
                     continue
 
                 if self.__cells[next_i][next_j].visited:
@@ -142,25 +146,45 @@ class Maze:
 
             for next_i, next_j in possible_dir:
                 if next_i - i == 1 and next_j - j == 0:
-                    if not (self.__cells[i][j].has_right_wall or self.__cells[next_i][next_j].has_left_wall):
+                    if not (
+                        self.__cells[i][j].has_right_wall
+                        or self.__cells[next_i][next_j].has_left_wall
+                    ):
                         queue.append((next_i, next_j))
                         prev[(next_i, next_j)] = (i, j)
-                        self.__cells[i][j].draw_move(self.__cells[next_i][next_j], undo=True)
+                        self.__cells[i][j].draw_move(
+                            self.__cells[next_i][next_j], undo=True
+                        )
                 elif next_i - i == -1 and next_j - j == 0:
-                    if not (self.__cells[i][j].has_left_wall or self.__cells[next_i][next_j].has_right_wall):
+                    if not (
+                        self.__cells[i][j].has_left_wall
+                        or self.__cells[next_i][next_j].has_right_wall
+                    ):
                         queue.append((next_i, next_j))
                         prev[(next_i, next_j)] = (i, j)
-                        self.__cells[i][j].draw_move(self.__cells[next_i][next_j], undo=True)
+                        self.__cells[i][j].draw_move(
+                            self.__cells[next_i][next_j], undo=True
+                        )
                 elif next_i - i == 0 and next_j - j == 1:
-                    if not (self.__cells[i][j].has_bottom_wall or self.__cells[next_i][next_j].has_top_wall):
+                    if not (
+                        self.__cells[i][j].has_bottom_wall
+                        or self.__cells[next_i][next_j].has_top_wall
+                    ):
                         queue.append((next_i, next_j))
                         prev[(next_i, next_j)] = (i, j)
-                        self.__cells[i][j].draw_move(self.__cells[next_i][next_j], undo=True)
+                        self.__cells[i][j].draw_move(
+                            self.__cells[next_i][next_j], undo=True
+                        )
                 elif next_i - i == 0 and next_j - j == -1:
-                    if not (self.__cells[i][j].has_top_wall or self.__cells[next_i][next_j].has_bottom_wall):
+                    if not (
+                        self.__cells[i][j].has_top_wall
+                        or self.__cells[next_i][next_j].has_bottom_wall
+                    ):
                         queue.append((next_i, next_j))
                         prev[(next_i, next_j)] = (i, j)
-                        self.__cells[i][j].draw_move(self.__cells[next_i][next_j], undo=True)
+                        self.__cells[i][j].draw_move(
+                            self.__cells[next_i][next_j], undo=True
+                        )
 
             self.__animate()
 
@@ -172,8 +196,9 @@ class Maze:
         while cur_cell:
             prev_cell = prev[cur_cell]
             if prev_cell is not None:
-                self.__cells[prev_cell[0]][prev_cell[1]].draw_move(self.__cells[cur_cell[0]][cur_cell[1]])
+                self.__cells[prev_cell[0]][prev_cell[1]].draw_move(
+                    self.__cells[cur_cell[0]][cur_cell[1]]
+                )
             cur_cell = prev_cell
 
         return True
-
