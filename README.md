@@ -141,7 +141,3 @@ The tests verify:
 - **uv** — package and environment management
 - **ruff** — linting and formatting
 - **isort** — import sorting
-
-## License
-
-This project is provided as-is for educational purposes.
